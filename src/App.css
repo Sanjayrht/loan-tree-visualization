@@ -1,0 +1,23 @@
+:root {
+    --main: linear-gradient(180deg, #012916, #56a07e);
+    --mute-bg: #efefef;
+    --light: #ffffff;
+    --primary: #012916;
+    --secondary: #56a07e;
+    --account: linear-gradient(180deg, #012916, #56a07e);
+    --loan: linear-gradient(180deg, #012916, #56a07e);
+    --collateral: linear-gradient(180deg, #012916, #56a07e);
+}
+
+.main-grad {
+    background: var(--main);
+}
+
+button.main-grad:hover {
+    background: linear-gradient(90deg, #ffffff, #d1ffea);
+    color: var(--secondary);
+}
+
+button.main-grad {
+    box-shadow: var(--primary) 0px 4px 6px -1px, var(--secondary) 0px 2px 4px -1px;
+}

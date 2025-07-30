@@ -7,9 +7,6 @@ export default defineConfig({
   server: {
     open: true,
   },
-  build: {
-    outDir: 'build'
-  },
   css: {
     devSourcemap: true,
   },

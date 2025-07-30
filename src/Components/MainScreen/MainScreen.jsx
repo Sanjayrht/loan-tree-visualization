@@ -1,17 +1,10 @@
-import { useEffect } from 'react';
 import {
     Background,
     ReactFlow,
-    addEdge,
     ConnectionLineType,
-    useNodesState,
-    useEdgesState
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
-import Account from './Nodes/Account';
-import Loan from './Nodes/Loan';
-import Collateral from './Nodes/Collateral';
 import { useNode } from '../../Context/TreeContext';
 
 

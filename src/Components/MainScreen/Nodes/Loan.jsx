@@ -4,7 +4,6 @@ import { useNode } from '../../../Context/TreeContext';
 
 const Loan = ({ data }) => {
     const { handleShow } = useNode()
-console.log(data);
     return (
         <div className='rounded-[3px] overflow-hidden bg-pink-100 min-w-20' onClick={() => handleShow(data)}>
             {data.isChild &&

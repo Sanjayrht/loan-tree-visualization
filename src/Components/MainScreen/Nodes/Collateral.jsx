@@ -1,5 +1,4 @@
 import { Handle, Position } from '@xyflow/react';
-import React from 'react';
 import { MdOutlineRealEstateAgent } from "react-icons/md";
 import { useNode } from '../../../Context/TreeContext';
 

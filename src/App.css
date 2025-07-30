@@ -4,9 +4,10 @@
     --light: #ffffff;
     --primary: #012916;
     --secondary: #56a07e;
-    --account: linear-gradient(180deg, #012916, #56a07e);
-    --loan: linear-gradient(180deg, #012916, #56a07e);
-    --collateral: linear-gradient(180deg, #012916, #56a07e);
+}
+
+* {
+    font-family: "Inter", sans-serif;
 }
 
 .main-grad {

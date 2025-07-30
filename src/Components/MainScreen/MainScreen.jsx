@@ -2,12 +2,11 @@ import {
     Background,
     ReactFlow,
     ConnectionLineType,
+    Controls
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 import { useNode } from '../../Context/TreeContext';
-
-
 
 const MainScreen = () => {
     const { nodeTypes, nodes, edges } = useNode()
@@ -21,6 +20,7 @@ const MainScreen = () => {
                 connectionLineType={ConnectionLineType.SmoothStep}
                 fitView
             >
+                <Controls />
                 <Background />
             </ReactFlow>
         </div>

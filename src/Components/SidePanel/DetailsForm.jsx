@@ -2,39 +2,22 @@ import { useNode } from '../../Context/TreeContext';
 import Button from '../Common/Button';
 import InputField from '../Common/InputField';
 
-const DetailsForm = ({ state, setState }) => {
-    const { dispatch } = useNode()
+const DetailsForm = () => {
+    const { dispatch, nodeActive, handleChange } = useNode()
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch({ type: "UPDATE_NODE", payload: state })
+        dispatch({ type: "UPDATE_NODE", payload: nodeActive.data })
     }
 
-    const handleChange = (e) => {
-        let { name, value } = e.target
-        if (name === "amount") {
-            if (!isNaN(value)) {
-                setState({
-                    ...state,
-                    [name]: value
-                })
-            }
-        } else {
-            setState({
-                ...state,
-                [name]: value
-            })
-        }
-
-    }
     return (
         <form onSubmit={handleSubmit} className='py-2'>
-            {state.type === "account" &&
+            {nodeActive.data?.type === "account" &&
                 <>
                     <InputField
                         name="name"
                         handleChange={handleChange}
-                        value={state?.name}
+                        value={nodeActive.data?.name}
                         label="name"
                         placeholder="Enter Name"
                         required={true}
@@ -43,27 +26,27 @@ const DetailsForm = ({ state, setState }) => {
                     <InputField
                         name="address"
                         handleChange={handleChange}
-                        value={state?.address}
+                        value={nodeActive.data?.address}
                         label="address"
                         placeholder="Enter Address"
                         required={true}
                     />
                 </>}
-            {state.type === "loan" &&
+            {nodeActive.data?.type === "loan" &&
                 <InputField
                     name="amount"
                     handleChange={handleChange}
-                    value={state?.amount}
+                    value={nodeActive.data?.amount}
                     label="amount"
                     placeholder="Enter Amount"
                     required={true}
                 />
             }
-            {state.type === "collateral" &&
+            {nodeActive.data?.type === "collateral" &&
                 <InputField
                     name="item"
                     handleChange={handleChange}
-                    value={state?.item}
+                    value={nodeActive.data?.item}
                     label="Item Name"
                     placeholder="Enter Item"
                     required={true}

@@ -4,10 +4,12 @@ import { useNode } from '../../../Context/TreeContext';
 
 const Loan = ({ data }) => {
     const { handleShow } = useNode()
-
+console.log(data);
     return (
         <div className='rounded-[3px] overflow-hidden bg-pink-100 min-w-20' onClick={() => handleShow(data)}>
-            <Handle type='target' position={Position.Left} />
+            {data.isChild &&
+                <Handle type='target' position={Position.Left} />
+            }
             <div className='flex items-center gap-1 text-[8px] px-1 font-semibold bg-yellow-300'>
                 <FaHandHoldingDollar />
                 <span>Loan</span>

@@ -1,79 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNode } from '../../Context/TreeContext';
 import { ImCross } from "react-icons/im";
-import InputField from '../Common/InputField';
 import Button from '../Common/Button';
 import { FaHandHoldingDollar, FaTrash } from 'react-icons/fa6';
 import { MdOutlineRealEstateAgent } from 'react-icons/md';
-import { v4 as uuidv4 } from 'uuid';
 import DetailsForm from './DetailsForm';
 import DeleteModal from '../Common/DeleteModal';
 
 const SidePanel = () => {
-    const { nodeActive, handleClose, dispatch } = useNode()
-    const [state, setState] = useState({})
+    const { nodeActive, handleClose, dispatch, onAddCollateral, onAddLoan } = useNode()
     const [show, setShow] = useState(false)
 
-    const onAddLoan = () => {
-        let uniqueId = uuidv4()
-        const obj = {
-            id: uniqueId,
-            data: {
-                id: uniqueId,
-                user: state.name,
-                amount: "1000",
-                type: "loan"
-            },
-            type: "loan",
-            position: { x: 0, y: 0 }
-        }
-
-        const edgeData = {
-            id: `${state.id}-${uniqueId}`, source: state.id, target: uniqueId, type: 'smoothstep', animated: true
-        }
-
-        dispatch({ type: "ADD_NODE", payload: obj })
-        dispatch({ type: "ADD_EDGE", payload: edgeData })
-    }
-
-    const onAddCollateral = () => {
-        let uniqueId = uuidv4()
-        const obj = {
-            id: uniqueId,
-            data: {
-                id: uniqueId,
-                user: state.name,
-                item: "car",
-                type: "collateral"
-            },
-            type: "collateral",
-            position: { x: 0, y: 0 }
-        }
-
-        const edgeData = {
-            id: `${state.id}-${uniqueId}`, source: state.id, target: uniqueId, type: 'smoothstep', animated: true
-        }
-
-        dispatch({ type: "ADD_NODE", payload: obj })
-        dispatch({ type: "ADD_EDGE", payload: edgeData })
-    }
-
     const onDeleteNode = () => {
-        dispatch({ type: "DELETE_NODE", payload: state.id })
+        dispatch({ type: "DELETE_NODE", payload: nodeActive.data?.id })
         setShow(false)
         handleClose()
     }
-
-
-    useEffect(() => {
-        if (nodeActive.show) {
-            setState(nodeActive.data)
-        }
-        return () => {
-            setState({})
-        }
-    }, [nodeActive.show])
-
 
     return (
         <>
@@ -94,7 +36,7 @@ const SidePanel = () => {
 
                 <div className="overflow-y-auto h-full p-2">
                     <h1 className='font-semibold'>Node Details</h1>
-                    <h2 className='mb-2 text-xs font-semibold'>ID : {state.id}</h2>
+                    <h2 className='mb-2 text-xs font-semibold'>ID : {nodeActive.data?.id}</h2>
                     <div>
                         <h1 className='font-semibold'></h1>
                         <Button
@@ -103,15 +45,15 @@ const SidePanel = () => {
                             icon={<FaTrash />}
                         />
                     </div>
-                    {state.type !== "collateral" &&
+                    {nodeActive.data?.type !== "collateral" &&
                         <div className='mt-5'>
                             <h1 className='font-semibold'>Add Node</h1>
                             <div className='flex gap-2 my-2'>
 
-                                {state.type !== "loan" &&
+                                {nodeActive.data?.type !== "loan" &&
                                     <Button
                                         title="Loan"
-                                        handleClick={onAddLoan}
+                                        handleClick={() => onAddLoan(true)}
                                         icon={<FaHandHoldingDollar />}
 
                                     />
@@ -126,10 +68,7 @@ const SidePanel = () => {
                         </div>
                     }
 
-                    <DetailsForm
-                        state={state}
-                        setState={setState}
-                    />
+                    <DetailsForm />
                 </div>
             </div>
 
